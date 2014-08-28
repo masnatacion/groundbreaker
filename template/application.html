@@ -1,0 +1,124 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en" dir="ltr"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang="en" dir="ltr"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9" lang="en" dir="ltr"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en" dir="ltr"><!--<![endif]-->
+
+<head>
+<title><%= title %></title>
+
+<!-- Meta Data ================ -->
+<meta charset="UTF-8" />
+<% if subdomain? %>
+<meta name="description" content="<%= company_for_subdomain.short_overview %>" />
+<% else %>
+<meta name="description" content="A leader in equity-based real estate crowdfunding, GroundBreaker focuses on investments in local private commercial and residential property." />
+<% end %>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<% if ['published_deals', 'users'].include? controller.controller_name %>
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<% end %>
+<%= csrf_meta_tag %>
+
+<!-- CSS ================ -->
+<!--[if !IE]><!-->
+<%= stylesheet_link_tag "application", :media => "all" %>
+<!--<![endif]-->
+
+<!--[if IE]><!-->
+<%= stylesheet_link_tag "application_a", :media => "all" %>
+<%= stylesheet_link_tag "application_b", :media => "all" %>
+<%= stylesheet_link_tag "application_c", :media => "all" %>
+<!--<![endif]-->
+
+<!-- Icons ================ -->
+<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"/>
+<!--<link rel="shortcut icon" href="favicon.ico" />-->
+<%= favicon_link_tag 'favicon.ico' %>
+
+<!-- Open Graph for facebook
+http://graph.facebook.com/[UserName] replace [UserName]
+with yours and get your fb:admis content information where the XXXX goes.
+================================================== -->
+<meta property="og:title" content="<%= title %>" />
+<meta property="og:type" content="" />
+<meta property="og:url" content="" />
+<meta property="og:image" content=""/>
+<meta property="og:site_name" content="" />
+<meta property="fb:admins" content="XXXXX" />
+<meta property="og:locale" content="en_us" />
+<meta property="og:description" content="  " />
+
+<!-- Add to Head after Style sheet http://modernizr.com/docs/#installing  ================ -->
+<%= javascript_include_tag "/javascripts/modernizr.custom.87724.js" %>
+
+
+</head>
+<body class="index-flex-dark">
+
+<!-- begin accesibility skip to nav skip content -->
+<ul class="visuallyhidden" id="top">
+  <li><a href="#nav" title="Skip to navigation" accesskey="n">Skip to navigation</a></li>
+  <li><a href="#page" title="Skip to content" accesskey="c">Skip to content</a></li>
+</ul>
+<!-- end /.visuallyhidden accesibility-->
+
+<!-- mobile navigation trigger-->
+<h5 class="mobile_nav"><a href="javascript:void(0)">&nbsp;<span></span></a></h5>
+<!--end mobile navigation trigger-->
+
+
+<%= render :partial => "layouts/header" %>
+
+<!-- begin #page - the container for everything but header -->
+<div id="page">
+  <div class='container'>
+    <% if notice %>
+      <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <%= alert %>
+      </div>
+    <% end %>
+ </div>
+
+  <%= yield %>
+  
+  <%= render :partial => "layouts/footer" %>
+
+  <span class="backToTop"><a href="#top">back to top</a></span>
+</div>
+<!-- close #page-->
+
+<!-- Javascripts
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<% unless subdomain? %>
+<%= render :partial => "layouts/olark" %>
+<% end %>
+<!-- begin google analytics code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42067037-1']);
+  _gaq.push(['_setDomainName', 'groundbreaker.co']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- end google analytics code -->
+<%= javascript_include_tag "application" %>
+<%= airbrake_javascript_notifier %>
+<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+</body>
+</html>

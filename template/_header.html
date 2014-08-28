@@ -1,0 +1,51 @@
+ <%= subdomain_color_overrides %>
+<!-- begin .header-->
+<header class="header clearfix"> <img src="/img/logo.png" class="print logo" alt="GroundBreaker Real Estate Investing" />
+  <div class="container">
+
+    <!-- begin #main_menu -->
+    <nav id="main_menu">
+      <ul class="accordmobile">
+        <% if subdomain? %>
+          <% @company = company_for_subdomain %>
+          <% if user_signed_in? %>
+            <% if @company.can_edit?(current_user)  %>
+              <li><%= link_to("manage company", edit_company_path(@company), :class => 'content-navigation') %></li>  
+            <% end %>
+            <% if current_user.can_create_company %>
+              <li><%= link_to "launch a new company", new_company_path, :class=>'content-navigation' %></li>
+            <% end %>
+          <% end %>
+        <% else %>
+          
+          <li><a href="/deals" class='content-navigation'>Browse Deals</a></li>
+          <li><a href="/companies" class='content-navigation'>Browse Companies</a></li>
+          <% if user_signed_in? && current_user.can_create_company %>
+          <li><%= link_to "Start Your Project", new_company_path, :class=>'content-navigation' %></li>
+          <% else %>
+          <li><a href="/pitch" class='content-navigation'>Get your own portal</a></li>
+          <% end %>
+          
+        <% end %>
+        <li class='divider'></li>
+        <% if user_signed_in? %>
+          <li><%= link_to("My Account", edit_user_registration_path, :class => 'btn btn-warning header-btn pad white-border') %></li>
+          <li><%= link_to("Sign out", destroy_user_session_path, :class => 'btn btn-warning header-btn pad white-border') %></li>
+        <% else %>
+          <li><a href='/users/sign_in' class='btn btn-important header-btn pad'>Login</a></li>
+          <li><a href='/users/sign_up' class='btn btn-warning header-btn'>Join</a></li>
+        <% end %>
+      </ul>
+    </nav>
+    <!-- close / #main_menu -->
+
+    <!-- begin #logo -->
+    <div id="logo"> 
+      <a href="/"><%= subdomain_logo %><!--effing ie7 support--></a> 
+    </div>
+    <!-- end #logo -->
+
+  </div>
+  <!-- close / .container-->
+</header>
+<!-- close /.header -->
